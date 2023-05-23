@@ -32,16 +32,13 @@ public class ApiController {
         return service.listar();
     }
 
-    // @PostMapping("/api")
-    // public Pessoa create(@RequestBody Pessoa obj){
-    //     return repo.save(obj);
-    // }
+    
     @PostMapping("/api/create")
      public ResponseEntity<?> create(@RequestBody Pessoa obj){
         return service.cadastrar(obj);
     }
 
-    @GetMapping("/user/{id}")
+    @GetMapping("api/user/{id}")
     public ResponseEntity<?> findOnePerson(@PathVariable Long id){
         return service.FindOnePerson(id);
     }
