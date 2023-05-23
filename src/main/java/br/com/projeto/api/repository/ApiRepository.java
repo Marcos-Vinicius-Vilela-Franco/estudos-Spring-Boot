@@ -12,4 +12,6 @@ public interface ApiRepository extends CrudRepository<Pessoa,Long> {
     List<Pessoa> findAll();
     
     List<Pessoa>findByOrderByNome();
+
+    int countById(Long id);
 }

@@ -27,7 +27,7 @@ public class ApiController {
     @Autowired
     private ApiService service;
 
-    @GetMapping("/users")
+    @GetMapping("api/users")
     public ResponseEntity<List<Pessoa>> findAll(){
         return service.listar();
     }
@@ -36,15 +36,16 @@ public class ApiController {
     // public Pessoa create(@RequestBody Pessoa obj){
     //     return repo.save(obj);
     // }
-    @PostMapping("/api")
+    @PostMapping("/api/create")
      public ResponseEntity<?> create(@RequestBody Pessoa obj){
         return service.cadastrar(obj);
     }
 
     @GetMapping("/user/{id}")
-    public Optional<Pessoa> findById(@PathVariable Long id){
-        return repo.findById(id);
+    public ResponseEntity<?> findOnePerson(@PathVariable Long id){
+        return service.FindOnePerson(id);
     }
+    
 
     @GetMapping("/users/order")
     public List<Pessoa> orderByNome(){

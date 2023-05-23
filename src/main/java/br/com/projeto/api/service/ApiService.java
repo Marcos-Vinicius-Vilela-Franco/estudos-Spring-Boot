@@ -38,8 +38,9 @@ public class ApiService {
         return new ResponseEntity<>(repo.findAll(),HttpStatus.OK);
     }
 
+    //método para encontrar uma pessoa
     public ResponseEntity<?> FindOnePerson(Long id){
-        if(id<0){
+        if(id<0 || repo.countById(id) == 0){
             mensagem.setMensagem("id inválido!");
             return new ResponseEntity<>(mensagem,HttpStatus.BAD_REQUEST);
         }else{
