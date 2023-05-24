@@ -42,7 +42,7 @@ public class ApiService {
     public ResponseEntity<?> FindOnePerson(Long id){
         if(repo.countById(id) == 0){
             mensagem.setMensagem("id inválido!");
-            return new ResponseEntity<>(mensagem,HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(mensagem,HttpStatus.NOT_FOUND);
         }else{
             return new ResponseEntity<>(repo.findById(id),HttpStatus.OK);
         }
@@ -51,7 +51,7 @@ public class ApiService {
     public ResponseEntity<?> update(Pessoa obj){
         if(repo.countById(obj.getId()) == 0){
             mensagem.setMensagem("id inválido!");
-            return new ResponseEntity<>(mensagem,HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(mensagem,HttpStatus.NOT_FOUND);
         }else{
             return cadastrar(obj);
         }
@@ -60,7 +60,7 @@ public class ApiService {
     public ResponseEntity<?> delete(Long id){
         if(repo.countById(id)==0){
             mensagem.setMensagem("id inválido!");
-            return new ResponseEntity<>(mensagem,HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(mensagem,HttpStatus.NOT_FOUND);
         }else{
             repo.deleteById(id);
             mensagem.setMensagem("Deletado com sucesso!");
