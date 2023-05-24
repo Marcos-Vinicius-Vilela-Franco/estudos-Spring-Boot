@@ -33,19 +33,38 @@ public class ApiService {
         }
     }
 
-    //lista todas pessoas
+    //lista todas "pessoas"
     public ResponseEntity<List<Pessoa>> listar(){
         return new ResponseEntity<>(repo.findAll(),HttpStatus.OK);
     }
 
-    //método para encontrar uma pessoa
+    //método para encontrar uma "pessoa"
     public ResponseEntity<?> FindOnePerson(Long id){
-        if(id<0 || repo.countById(id) == 0){
+        if(repo.countById(id) == 0){
             mensagem.setMensagem("id inválido!");
             return new ResponseEntity<>(mensagem,HttpStatus.BAD_REQUEST);
         }else{
             return new ResponseEntity<>(repo.findById(id),HttpStatus.OK);
         }
     }
-
+    //método para encontrar editar uma "pessoa"
+    public ResponseEntity<?> update(Pessoa obj){
+        if(repo.countById(obj.getId()) == 0){
+            mensagem.setMensagem("id inválido!");
+            return new ResponseEntity<>(mensagem,HttpStatus.BAD_REQUEST);
+        }else{
+            return cadastrar(obj);
+        }
+    }
+    //método para encontrar deletar uma "pessoa"
+    public ResponseEntity<?> delete(Long id){
+        if(repo.countById(id)==0){
+            mensagem.setMensagem("id inválido!");
+            return new ResponseEntity<>(mensagem,HttpStatus.BAD_REQUEST);
+        }else{
+            repo.deleteById(id);
+            mensagem.setMensagem("Deletado com sucesso!");
+            return new ResponseEntity<>(mensagem,HttpStatus.OK);
+        }
+    }
 }
